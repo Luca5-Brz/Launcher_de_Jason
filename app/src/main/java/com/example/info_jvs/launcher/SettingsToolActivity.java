@@ -35,15 +35,17 @@ import java.io.File;
 public class SettingsToolActivity extends AppCompatActivity {
 
     int brightnessmode;
-
     int rotationmode;
+
     SeekBar notification ;
     Toolbar toolbar;
     AudioManager audioManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_tool);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         notification = findViewById(R.id.notification);
 
@@ -117,16 +119,15 @@ public class SettingsToolActivity extends AppCompatActivity {
     public void StartButtonListener () {
 
         //Toast.makeText(this,"startlistener",Toast.LENGTH_LONG).show();
-        Switch automaticLuminosity = (Switch) findViewById(R.id.automaticLuminosity);
+        Switch automaticLuminosity = findViewById(R.id.automaticLuminosity);
 
-        automaticLuminosity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
+        automaticLuminosity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                //getBrightMode();
-
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked)
+            {
+                // quand le bouton est checké, on modifie le BrightMode
                 setBrightMode();
-
             }
         });
 
