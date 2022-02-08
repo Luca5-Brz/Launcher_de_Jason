@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.info_jvs.launcher.SettingsToolActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <Switch
+            android:id="@+id/automaticLuminosity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50px"
+            android:paddingTop="100px"
+            android:text="Luminosité automatique" />
+
+        <Switch
+            android:id="@+id/automaticRotation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50px"
+            android:paddingTop="50px"
+            android:text="Rotation automatique" />
+
+
+        <TextView
+            android:layout_height="50px"
+            android:layout_marginTop="25px"
+            android:id="@+id/textViewLuminosity"
+            android:layout_width="match_parent"
+            android:text="Volume du son:"
+            />
+
+        <SeekBar
+            android:id="@+id/notification"
+            android:layout_width="match_parent"
+            android:layout_height="50px"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="30dip"
+            android:layout_marginTop="20px"
+
+            android:scaleType="fitCenter" />
+
+
+       <Button
+        android:id="@+id/Retablir4G"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25px"
+        android:paddingBottom="20px"
+        android:paddingTop="20px"
+        android:text="Réactiver la 4G" />
+
+        <Button
+            android:id="@+id/RetablirWifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25px"
+            android:paddingBottom="20px"
+            android:paddingTop="20px"
+            android:text="Réactiver le wifi" />
+
+        <Button
+            android:id="@+id/installAddon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25px"
+            android:paddingBottom="20px"
+            android:paddingTop="20px"
+            android:text="Installer l'add-on teamviewer" />
+
+        <Button
+            android:id="@+id/selectKeyboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25px"
+            android:paddingBottom="20px"
+            android:paddingTop="20px"
+            android:text="Choisir un clavier" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

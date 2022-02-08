@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.info_jvs.launcher">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--
+      <receiver android:name="packageName.DownloadReceiver" android:exported="true">
+         <intent-filter>
+             <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+         </intent-filter>
+
+         <intent-filter>
+             <category android:name="android.intent.category.DEFAULT" />
+             <action android:name="android.intent.action.PACKAGE_ADDED" />
+             <action android:name="android.intent.action.PACKAGE_INSTALL" />
+             <data android:scheme="package" />
+         </intent-filter>
+     </receiver>
+    -->
+    <!--
+ <receiver android:enabled="true" android:exported="true" android:label="BootService" android:name="com.project.services.BootService">
+         <intent-filter>
+             <action android:name="android.intent.action.BOOT_COMPLETED"/>
+             <data android:scheme="package"/>
+         </intent-filter>
+         <intent-filter>
+             <action android:name="android.intent.action.PACKAGE_ADDED"/>
+             <data android:scheme="package"/>
+         </intent-filter>
+         <intent-filter>
+             <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+             <data android:scheme="package"/>
+         </intent-filter>
+         <intent-filter>
+             <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+             <data android:scheme="package"/>
+         </intent-filter>
+         <intent-filter>
+             <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+             <data android:scheme="package"/>
+         </intent-filter>
+     </receiver>
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <service android:name=".CheckRunningActivity" />
+        <service android:name=".GetPositionService" />
+        <service android:name=".GetNewMessageService" />
+
+        <receiver
+            android:name=".StartMyServiceAtBootReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".AdminReceiver"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".HUD"
+            android:enabled="true" />
+
+        <activity android:name=".HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".GetPositionService" />
+        <service android:name=".GetNewMessageService" />
+
+        <activity
+            android:name=".MainActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".SettingsToolActivity"
+            android:label="@string/title_activity_settings_tool"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>
