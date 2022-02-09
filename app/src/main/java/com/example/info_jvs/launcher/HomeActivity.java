@@ -1009,7 +1009,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onPause();
       }
 
-    //bare de changement de luminosité
+    //barre de changement de luminosité
     private void setSeekbar() {
 
         try {
@@ -1468,7 +1468,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
          NetworkInfo mData4G = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-//vérifie si c'est pas une tablette ou pas (plantage car pas de 4g sur tablette)
+        //vérifie si c'est pas une tablette ou pas (plantage car pas de 4g sur tablette)
          if(getResources().getBoolean(R.bool.isTab))
          {
             // Toast.makeText(this,"Tablette",Toast.LENGTH_LONG).show();
@@ -1545,7 +1545,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
          }
 
-//lancement des applications
+        //lancement des applications
         switch (v.getId()) {
             case R.id.button: {
 
@@ -1724,8 +1724,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
 
-
-
             case R.id.button13: {
                 Toast.makeText(this, "Killed", Toast.LENGTH_LONG).show();
                 ActivityManager am = (ActivityManager) getSystemService(Activity.ACTIVITY_SERVICE);
@@ -1743,14 +1741,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
-                final EditText userInput = (EditText) promptsView
-                        .findViewById(R.id.editTextDialogUserInput);
+                final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
 
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         // get user input and set it to result
                                         // edit text
@@ -1760,20 +1756,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                         SimpleDateFormat df = new SimpleDateFormat("yyMMdd");
                                         String formattedDate = df.format(c);
                                        // Toast.makeText(HomeActivity.this,formattedDate,Toast.LENGTH_LONG).show();
-                                        ///mot de passe dans le code pour ne pas avoir à configurer cela au démarrage de l'application.
+                                        //mot de passe dans le code pour ne pas avoir à configurer cela au démarrage de l'application.
                                         if (userInput.getText().toString().equals(formattedDate)) {
                                             // getApplicationContext().stopService(new Intent(getApplicationContext(),CheckRunningActivity.class));
                                             new Handler().postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-
-                                                   // getApplicationContext().stopService(new Intent(getApplicationContext(),CheckRunningActivity.class));
-                                                   // getApplicationContext().stopService(new Intent(getApplicationContext(),HUD.class));
-                                                   // closeapp();
-                                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                                    startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
                                                 }
                                             }, 1000);
-                                            //
+
                                        }
                                         else {
                                             Toast.makeText(getApplicationContext(), "Mauvais mot de passe", Toast.LENGTH_LONG).show();
@@ -1781,18 +1773,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                                     }
                                 })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();
                                     }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
+                                })
+                        .create()
+                        .show();
 
                 break;
             }
@@ -1812,8 +1799,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void updateMyself ()
-    {
+    public void updateMyself () {
 
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         Bundle b = new Bundle();

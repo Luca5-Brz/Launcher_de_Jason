@@ -64,7 +64,6 @@ public class SettingsToolActivity extends AppCompatActivity {
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i*2, 0);
                 audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, i, 0);
                 audioManager.setStreamVolume(AudioManager.STREAM_ALARM, i, 0);
-
                 audioManager.setStreamVolume(AudioManager.STREAM_RING,i,0);
                 audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM,i,0);
 
@@ -83,6 +82,7 @@ public class SettingsToolActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         //Toast.makeText(this,"oncreate",Toast.LENGTH_LONG).show();
+
         getBrightMode();
         getRotationMode();
         Switch automaticLuminosity = (Switch) findViewById(R.id.automaticLuminosity);
@@ -118,9 +118,7 @@ public class SettingsToolActivity extends AppCompatActivity {
 
     public void StartButtonListener () {
 
-        //Toast.makeText(this,"startlistener",Toast.LENGTH_LONG).show();
         Switch automaticLuminosity = findViewById(R.id.automaticLuminosity);
-
         automaticLuminosity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
@@ -132,7 +130,6 @@ public class SettingsToolActivity extends AppCompatActivity {
         });
 
         Switch automaticRotation = (Switch) findViewById(R.id.automaticRotation);
-
         automaticRotation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -158,7 +155,7 @@ public class SettingsToolActivity extends AppCompatActivity {
         repair4G.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-           check4GNetwork();
+                check4GNetwork();
                 //Intent intent = new Intent(this, GPSLocation.class);
                 //startActivity(intent);
 
@@ -173,7 +170,6 @@ public class SettingsToolActivity extends AppCompatActivity {
 
             }
         });
-
         Button repairWIFI=(Button) findViewById(R.id.RetablirWifi);
         repairWIFI.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -193,11 +189,13 @@ public class SettingsToolActivity extends AppCompatActivity {
 
             }
         });
+
+
         Button selectKeyboard=(Button) findViewById(R.id.selectKeyboard);
         selectKeyboard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                InputMethodManager ime=(InputMethodManager)getApplicationContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager ime=(InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if(ime!=null) {
                     ime.showInputMethodPicker();
                 }
@@ -268,6 +266,7 @@ public class SettingsToolActivity extends AppCompatActivity {
         WifiManager wManager = (WifiManager) this.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wManager.setWifiEnabled(false);
     }
+
     public void check4GNetwork() {
 
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -301,10 +300,9 @@ public class SettingsToolActivity extends AppCompatActivity {
     }
 
     //This method will give brightness mode
-//if brigthnessmode=0 means Auto mode is currently off
-//if brightnessmode=1 means Auto mode is currently on
+        //if brigthnessmode=0 means Auto mode is currently off
+        //if brightnessmode=1 means Auto mode is currently on
     protected void getBrightMode() {
-// TODO Auto-generated method stub
         try {
             brightnessmode = Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE);
         } catch (Exception e) {
@@ -312,10 +310,30 @@ public class SettingsToolActivity extends AppCompatActivity {
         }
     }
 
+    protected void setBrightMode() {
+
+        getBrightMode();
+        if (brightnessmode == 1) {
+            // on
+            //Toast.makeText(this,"Activé",Toast.LENGTH_LONG).show();
+            android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+            // Toast.makeText(this, "set brightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
+
+        }
+        if (brightnessmode == 0) {
+            //off
+            //Toast.makeText(this,"Désactivé",Toast.LENGTH_LONG).show();
+            android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
+            // Toast.makeText(this, "setbrightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
+
+        }
+    }
 
     protected void getRotationMode() {
 
-        if (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1)
+        if (Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1)
         {
           //  Toast.makeText(getApplicationContext(), "Auto Rotate is ON", Toast.LENGTH_SHORT).show();
             rotationmode=1;
@@ -327,35 +345,13 @@ public class SettingsToolActivity extends AppCompatActivity {
         }
     }
 
-
-        protected void setBrightMode() {
-// TODO Auto-generated method stub
-            getBrightMode();
-            if (brightnessmode == 1) {
-                // on
-                //Toast.makeText(this,"Activé",Toast.LENGTH_LONG).show();
-                android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-               // Toast.makeText(this, "set brightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
-
-            }
-            if (brightnessmode == 0) {
-                //off
-                //Toast.makeText(this,"Désactivé",Toast.LENGTH_LONG).show();
-                android.provider.Settings.System.putInt(getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE,
-                        Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
-               // Toast.makeText(this, "setbrightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
-
-            }
-    }
-
     protected void setRotationtMode() {
 // TODO Auto-generated method stub
         getRotationMode();
             if (rotationmode == 0) {
                 // on
                 //Toast.makeText(this,"set Activé",Toast.LENGTH_LONG).show();
-                Settings.System.putInt( getApplicationContext().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 1);
+                Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 1);
 
               //  Toast.makeText(this, "set brightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
 
@@ -363,7 +359,7 @@ public class SettingsToolActivity extends AppCompatActivity {
             if (rotationmode == 1) {
                 //off
                // Toast.makeText(this,"set Désactivé",Toast.LENGTH_LONG).show();
-                Settings.System.putInt( getApplicationContext().getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0);
+                Settings.System.putInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0);
 
                // Toast.makeText(this, "setbrightnessmode "+brightnessmode ,Toast.LENGTH_LONG).show();
 
@@ -371,6 +367,12 @@ public class SettingsToolActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
     private DownloadManager downloadManager;
     private long myDownloadReference;
     String storeUrl="http://212.166.21.236:8080/Store/";
